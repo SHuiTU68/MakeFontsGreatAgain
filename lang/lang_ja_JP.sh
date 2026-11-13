@@ -49,6 +49,7 @@ ERR_NO_SYSTEM_DIR="[!] モジュールに system ディレクトリが存在し�
 FONT_BLOCKED="[✗] ブラックリストによりブロックされたフォント設定:"
 FONT_ALLOWED="[✓] 許可されたフォント設定:"
 GLOBAL_FB_ON="[✓] ColorOSグローバルフォントフォールバックを有効化:"
+SYMLINK_RESTORED="[✓] システムフォントのリンクを復元:"
 FONT_REVERSE="[*] モジュール内蔵のフォント設定を使用:"
 
 ##### unicode_filter.sh #####

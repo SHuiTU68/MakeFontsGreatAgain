@@ -51,6 +51,20 @@ handle_file() {
   local MOD_SUBDIR="$2"
   local FILE_NAME
   FILE_NAME="$(basename "$FILE_PATH")"
+  # 模块内目标 = 挂载路径本身(去前导/): system/* → /system, system_ext/product/odm/vendor 顶层 → 对应分区
+  local REL_PATH="${FILE_PATH#/}"
+
+  # 复制到模块目标位置; 顶层分区别名环境双写(system/*), 无效处仅为无害空目录
+  mount_copy() {
+    local src="$1" rel="$2"
+    mkdir -p "$MODPATH/${rel%/*}"
+    cp -f "$src" "$MODPATH/$rel"
+    case "$rel" in
+      system_ext/*|product/*|odm/*|vendor/*)
+        mkdir -p "$MODPATH/system/${rel%/*}"
+        cp -f "$src" "$MODPATH/system/$rel" ;;
+    esac
+  }
 
   [ ! -f "$FILE_PATH" ] && return
 
@@ -68,15 +82,15 @@ handle_file() {
 
   # ColorOS 字体引擎过滤配置: 保留原内容, 仅开启全局字体回退(加入黑名单可恢复默认)
   if [ "$FILE_NAME" = "sys_font_config_list.xml" ]; then
-    mkdir -p "$MODPATH/system/$MOD_SUBDIR"
-    cp -f "$FILE_PATH" "$MODPATH/system/$MOD_SUBDIR/$FILE_NAME"
-    sed -i 's|<global-font-fallback-for-all>[01]</global-font-fallback-for-all>|<global-font-fallback-for-all>1</global-font-fallback-for-all>|' "$MODPATH/system/$MOD_SUBDIR/$FILE_NAME"
+    mount_copy "$FILE_PATH" "$REL_PATH"
+    _sedfb='s|<global-font-fallback-for-all>[01]</global-font-fallback-for-all>|<global-font-fallback-for-all>1</global-font-fallback-for-all>|'
+    sed -i "$_sedfb" "$MODPATH/$REL_PATH"
+    [ -f "$MODPATH/system/$REL_PATH" ] && sed -i "$_sedfb" "$MODPATH/system/$REL_PATH"
     ui_print "$GLOBAL_FB_ON $FILE_NAME"
     PROCESSED_FILES="$PROCESSED_FILES $FILE_PATH"
     return
   fi
 
-  mkdir -p "$MODPATH/system/$MOD_SUBDIR"
   local SRC
   if is_reversed "$FILE_NAME" && [ -f "$MODPATH/$FILE_NAME" ]; then
     SRC="$MODPATH/$FILE_NAME"
@@ -85,7 +99,7 @@ handle_file() {
     SRC="$SRC_FONT_XML"
   fi
 
-  cp -f "$SRC" "$MODPATH/system/$MOD_SUBDIR/$FILE_NAME"
+  mount_copy "$SRC" "$REL_PATH"
 
   if is_whitelisted "$FILE_NAME"; then
     ui_print "$FONT_ALLOWED $FILE_NAME"

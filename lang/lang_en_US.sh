@@ -49,6 +49,7 @@ ERR_NO_SYSTEM_DIR="[!] system directory is missing in module"
 FONT_BLOCKED="[✗] Font configuration blocked:"
 FONT_ALLOWED="[✓] Font configuration allowed:"
 GLOBAL_FB_ON="[✓] ColorOS global font fallback enabled:"
+SYMLINK_RESTORED="[✓] Restored system font symlink:"
 FONT_REVERSE="[*] Using built-in module font configuration:"
 
 ##### unicode_filter.sh #####

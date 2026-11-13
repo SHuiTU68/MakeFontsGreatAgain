@@ -57,6 +57,18 @@ else
   rm -rf "$MODPATH/zygisk"
 fi
 
+# 恢复被安装包覆盖的系统字体符号链接(如 ColorOS /system/fonts/SysFont-*.ttf -> /data/... 字体切换链接)
+# 保证 OEM 字体切换机制(链接农场)在安装模块后仍然生效
+for f in "$MODPATH"/system/fonts/*; do
+  [ -e "$f" ] || [ -L "$f" ] || continue
+  _link=$(readlink "/system/fonts/$(basename "$f")" 2>/dev/null)
+  if [ -n "$_link" ]; then
+    rm -f "$f"
+    ln -s "$_link" "$f"
+    ui_print "$SYMLINK_RESTORED $(basename "$f") -> $_link"
+  fi
+done
+
 . "$MODPATH/search_dirs.sh"
 
 ui_print "- Welcome to MFGA!"

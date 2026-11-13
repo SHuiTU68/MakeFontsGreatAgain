@@ -49,6 +49,7 @@ ERR_NO_SYSTEM_DIR="[!] 模块缺少 system 目录"
 FONT_BLOCKED="[✗] 已拦截黑名单字体配置:"
 FONT_ALLOWED="[✓] 已放行字体配置:"
 GLOBAL_FB_ON="[✓] 已开启ColorOS全局字体回退:"
+SYMLINK_RESTORED="[✓] 恢复系统字体符号链接:"
 FONT_REVERSE="[*] 使用模块内置字体配置:"
 
 ##### unicode_filter.sh #####
