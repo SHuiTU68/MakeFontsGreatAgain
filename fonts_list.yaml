@@ -2,6 +2,7 @@ fallback:
   whitelist:
     - flyme_font_fallback.xml
     - flyme_fallback.xml
+    - sys_font_config_list.xml
 
   blacklist:
     - fonts_customization.xml

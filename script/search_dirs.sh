@@ -66,6 +66,16 @@ handle_file() {
     return
   fi
 
+  # ColorOS 字体引擎过滤配置: 保留原内容, 仅开启全局字体回退(加入黑名单可恢复默认)
+  if [ "$FILE_NAME" = "sys_font_config_list.xml" ]; then
+    mkdir -p "$MODPATH/system/$MOD_SUBDIR"
+    cp -f "$FILE_PATH" "$MODPATH/system/$MOD_SUBDIR/$FILE_NAME"
+    sed -i 's|<global-font-fallback-for-all>[01]</global-font-fallback-for-all>|<global-font-fallback-for-all>1</global-font-fallback-for-all>|' "$MODPATH/system/$MOD_SUBDIR/$FILE_NAME"
+    ui_print "$GLOBAL_FB_ON $FILE_NAME"
+    PROCESSED_FILES="$PROCESSED_FILES $FILE_PATH"
+    return
+  fi
+
   mkdir -p "$MODPATH/system/$MOD_SUBDIR"
   local SRC
   if is_reversed "$FILE_NAME" && [ -f "$MODPATH/$FILE_NAME" ]; then
@@ -101,7 +111,9 @@ search_and_copy() {
 }
 
 search_and_copy "/system/system_ext/etc" "system_ext/etc"
+search_and_copy "/system_ext/etc" "system_ext/etc"
 search_and_copy "/system/product/etc" "product/etc"
 search_and_copy "/system/etc" "etc"
+search_and_copy "/system_ext/oplus" "system_ext/oplus"
 
 ui_print "$FONTS_DONE"
