@@ -28,7 +28,8 @@ jobs:
           echo "Base: $zip_url"
           wget -q -O base.zip "$zip_url"
           mkdir work
-          unzip -q base.zip -d work
+          # unzip 对空目录条目会给出警告并返回 1, 仅视为成功; >1 才是真失败
+          unzip -q base.zip -d work || { ec=$?; [ "$ec" -eq 1 ] && echo "unzip warnings ignored" || exit "$ec"; }
           test -f work/module.prop || { echo "base zip has no module.prop"; exit 1; }
           grep -E '^(id|version|versionCode)=' work/module.prop
 
