@@ -1,0 +1,57 @@
+name: Build Module
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+    paths:
+      - 'fonts.xml'
+      - 'fonts_list.yaml'
+      - 'script/**'
+      - 'lang/**'
+      - 'fonts/**'
+      - 'webroot/**'
+      - '.github/workflows/build-module.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Download base module zip
+        run: |
+          set -e
+          zip_url=$(python3 -c "import json;print(json.load(open('update.json'))['zipUrl'])")
+          echo "Base: $zip_url"
+          wget -q -O base.zip "$zip_url"
+          mkdir work
+          unzip -q base.zip -d work
+          test -f work/module.prop || { echo "base zip has no module.prop"; exit 1; }
+          grep -E '^(id|version|versionCode)=' work/module.prop
+
+      - name: Overlay repository files
+        run: |
+          set -e
+          cp -f fonts.xml fonts_list.yaml work/
+          cp -rf script lang fonts webroot work/
+          ver=$(grep '^version=' work/module.prop | cut -d= -f2)
+          ver=${ver//[^0-9A-Za-z._-]/_}
+          echo "MFGA_VERSION=$ver" >> "$GITHUB_ENV"
+          echo "Packaged version: $ver"
+
+      - name: Package module zip
+        run: |
+          set -e
+          cd work
+          zip -r9 "../MFGA-${MFGA_VERSION}.zip" . -x '*.git*' -x '*.github*'
+          cd ..
+          unzip -l "MFGA-${MFGA_VERSION}.zip" | head -30
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: MFGA-Module-${{ env.MFGA_VERSION }}
+          path: MFGA-*.zip
