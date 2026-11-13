@@ -38,49 +38,50 @@
     <!--  MIUI MOD: Font_VariableFont  -->
     <!--  END Font_VariableFont  -->
     <!-- For WebView font -->
-    <!-- 使用空壳字体文件"Roboto"提供度量参数，防止出现偏移 -->
+    <!-- ColorOS 字体切换适配: SysFont-*.ttf 是稳定链接(实际内容随 ColorOS 所选字体变化) -->
+    <!-- OPPO Sans(可变) 与 Roboto 两种状态下均由本族按档位固定 wght 轴, 保证粗细字重正确 -->
     <family name="sans-serif">
-        <font weight="100" style="normal">Roboto-Regular.ttf
+        <font weight="100" style="normal">SysFont-Regular.ttf
             <axis tag="ital" stylevalue="0" />
             <axis tag="wdth" stylevalue="100" />
             <axis tag="wght" stylevalue="100" />
         </font>
-        <font weight="200" style="normal">Roboto-Regular.ttf
+        <font weight="200" style="normal">SysFont-Regular.ttf
             <axis tag="ital" stylevalue="0" />
             <axis tag="wdth" stylevalue="100" />
             <axis tag="wght" stylevalue="200" />
         </font>
-        <font weight="300" style="normal">Roboto-Regular.ttf
+        <font weight="300" style="normal">SysFont-Regular.ttf
             <axis tag="ital" stylevalue="0" />
             <axis tag="wdth" stylevalue="100" />
             <axis tag="wght" stylevalue="300" />
         </font>
-        <font weight="400" style="normal">Roboto-Regular.ttf
+        <font weight="400" style="normal">SysFont-Regular.ttf
             <axis tag="ital" stylevalue="0" />
             <axis tag="wdth" stylevalue="100" />
             <axis tag="wght" stylevalue="400" />
         </font>
-        <font weight="500" style="normal">Roboto-Regular.ttf
+        <font weight="500" style="normal">SysFont-Regular.ttf
             <axis tag="ital" stylevalue="0" />
             <axis tag="wdth" stylevalue="100" />
             <axis tag="wght" stylevalue="500" />
         </font>
-        <font weight="600" style="normal">Roboto-Regular.ttf
+        <font weight="600" style="normal">SysFont-Regular.ttf
             <axis tag="ital" stylevalue="0" />
             <axis tag="wdth" stylevalue="100" />
             <axis tag="wght" stylevalue="600" />
         </font>
-        <font weight="700" style="normal">Roboto-Regular.ttf
+        <font weight="700" style="normal">SysFont-Regular.ttf
             <axis tag="ital" stylevalue="0" />
             <axis tag="wdth" stylevalue="100" />
             <axis tag="wght" stylevalue="700" />
         </font>
-        <font weight="800" style="normal">Roboto-Regular.ttf
+        <font weight="800" style="normal">SysFont-Regular.ttf
             <axis tag="ital" stylevalue="0" />
             <axis tag="wdth" stylevalue="100" />
             <axis tag="wght" stylevalue="800" />
         </font>
-        <font weight="900" style="normal">Roboto-Regular.ttf
+        <font weight="900" style="normal">SysFont-Regular.ttf
             <axis tag="ital" stylevalue="0" />
             <axis tag="wdth" stylevalue="100" />
             <axis tag="wght" stylevalue="900" />
@@ -104,15 +105,66 @@
         <font weight="900" style="normal">900.ttf</font>
     </family>
 
-    <!-- ColorOS/OPPO 具名英文与符号族:统一映射到模块主字体链 (ColorOS13+) -->
+    <!-- ColorOS 具名族: 与原厂 fonts.xml 一致, 文件由系统提供, Roboto/OPPO Sans 切换均正常 -->
     <family name="sys-sans-en">
-        <font supportedAxes="wght,ital">Roboto-Regular.ttf
-            <axis tag="wdth" stylevalue="100" />
+        <font weight="100" style="normal" postScriptName="OPlusSansEn">SysSans-En-Regular.ttf
+            <axis tag="wght" stylevalue="100" />
+        </font>
+        <font weight="200" style="normal" postScriptName="OPlusSansEn">SysSans-En-Regular.ttf
+            <axis tag="wght" stylevalue="200" />
+        </font>
+        <font weight="300" style="normal" postScriptName="OPlusSansEn">SysSans-En-Regular.ttf
+            <axis tag="wght" stylevalue="300" />
+        </font>
+        <font weight="400" style="normal" postScriptName="OPlusSansEn">SysSans-En-Regular.ttf
+            <axis tag="wght" stylevalue="400" />
+        </font>
+        <font weight="500" style="normal" postScriptName="OPlusSansEn">SysSans-En-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+        </font>
+        <font weight="600" style="normal" postScriptName="OPlusSansEn">SysSans-En-Regular.ttf
+            <axis tag="wght" stylevalue="600" />
+        </font>
+        <font weight="700" style="normal" postScriptName="OPlusSansEn">SysSans-En-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+        </font>
+        <font weight="800" style="normal" postScriptName="OPlusSansEn">SysSans-En-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+        </font>
+        <font weight="900" style="normal" postScriptName="OPlusSansEn">SysSans-En-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+        </font>
+        <font weight="1000" style="normal" postScriptName="OPlusSansEn">SysSans-En-Regular.ttf
+            <axis tag="wght" stylevalue="1000" />
         </font>
     </family>
     <family name="op-sans-en">
-        <font supportedAxes="wght,ital">Roboto-Regular.ttf
-            <axis tag="wdth" stylevalue="100" />
+        <font weight="100" style="normal" postScriptName="OSans">OPSans-En-Regular.ttf
+            <axis tag="wght" stylevalue="100" />
+        </font>
+        <font weight="200" style="normal" postScriptName="OSans">OPSans-En-Regular.ttf
+            <axis tag="wght" stylevalue="200" />
+        </font>
+        <font weight="300" style="normal" postScriptName="OSans">OPSans-En-Regular.ttf
+            <axis tag="wght" stylevalue="300" />
+        </font>
+        <font weight="400" style="normal" postScriptName="OSans">OPSans-En-Regular.ttf
+            <axis tag="wght" stylevalue="400" />
+        </font>
+        <font weight="500" style="normal" postScriptName="OSans">OPSans-En-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+        </font>
+        <font weight="600" style="normal" postScriptName="OSans">OPSans-En-Regular.ttf
+            <axis tag="wght" stylevalue="600" />
+        </font>
+        <font weight="700" style="normal" postScriptName="OSans">OPSans-En-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+        </font>
+        <font weight="800" style="normal" postScriptName="OSans">OPSans-En-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+        </font>
+        <font weight="900" style="normal" postScriptName="OSans">OPSans-En-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
         </font>
     </family>
     <family name="roboto">
@@ -120,9 +172,22 @@
             <axis tag="wdth" stylevalue="100" />
         </font>
     </family>
+    <!-- 与原厂一致: OSans 实心数字符号可变字体, 按原厂映射固定 wght 轴 -->
     <family name="osans-solid-digits">
-        <font supportedAxes="wght,ital">Roboto-Regular.ttf
-            <axis tag="wdth" stylevalue="100" />
+        <font weight="100" style="normal" postScriptName="OPlusSansSolidDigitsVF">OSans-Solid-Digits-VF.ttf
+            <axis tag="wght" stylevalue="312" />
+        </font>
+        <font weight="400" style="normal" postScriptName="OPlusSansSolidDigitsVF">OSans-Solid-Digits-VF.ttf
+            <axis tag="wght" stylevalue="486" />
+        </font>
+        <font weight="500" style="normal" postScriptName="OPlusSansSolidDigitsVF">OSans-Solid-Digits-VF.ttf
+            <axis tag="wght" stylevalue="656" />
+        </font>
+        <font weight="600" style="normal" postScriptName="OPlusSansSolidDigitsVF">OSans-Solid-Digits-VF.ttf
+            <axis tag="wght" stylevalue="890" />
+        </font>
+        <font weight="700" style="normal" postScriptName="OPlusSansSolidDigitsVF">OSans-Solid-Digits-VF.ttf
+            <axis tag="wght" stylevalue="1000" />
         </font>
     </family>
 
@@ -151,17 +216,38 @@
     <alias name="sans-serif-condensed-medium" to="sans-serif-condensed" weight="500" />
 
 	<!-- 可变衬线字体调用 -->
-    <!-- ColorOS/OPPO 衬线具名族:统一映射到模块衬线字体 (ColorOS13+) -->
+    <!-- ColorOS 衬线具名族 sys-serif: 与原厂一致, Oplus-Serif(OPPO Serif SC) 可变 wght 100-1000 -->
     <family name="sys-serif">
-        <font weight="100" style="normal">100.ttf</font>
-        <font weight="200" style="normal">200.ttf</font>
-        <font weight="300" style="normal">300.ttf</font>
-        <font weight="400" style="normal">400.ttf</font>
-        <font weight="500" style="normal">500.ttf</font>
-        <font weight="600" style="normal">600.ttf</font>
-        <font weight="700" style="normal">700.ttf</font>
-        <font weight="800" style="normal">800.ttf</font>
-        <font weight="900" style="normal">900.ttf</font>
+        <font weight="100" style="normal" postScriptName="OPPOSerifSC">Oplus-Serif.ttf
+            <axis tag="wght" stylevalue="100" />
+        </font>
+        <font weight="200" style="normal" postScriptName="OPPOSerifSC">Oplus-Serif.ttf
+            <axis tag="wght" stylevalue="200" />
+        </font>
+        <font weight="300" style="normal" postScriptName="OPPOSerifSC">Oplus-Serif.ttf
+            <axis tag="wght" stylevalue="300" />
+        </font>
+        <font weight="400" style="normal" postScriptName="OPPOSerifSC">Oplus-Serif.ttf
+            <axis tag="wght" stylevalue="400" />
+        </font>
+        <font weight="500" style="normal" postScriptName="OPPOSerifSC">Oplus-Serif.ttf
+            <axis tag="wght" stylevalue="500" />
+        </font>
+        <font weight="600" style="normal" postScriptName="OPPOSerifSC">Oplus-Serif.ttf
+            <axis tag="wght" stylevalue="600" />
+        </font>
+        <font weight="700" style="normal" postScriptName="OPPOSerifSC">Oplus-Serif.ttf
+            <axis tag="wght" stylevalue="700" />
+        </font>
+        <font weight="800" style="normal" postScriptName="OPPOSerifSC">Oplus-Serif.ttf
+            <axis tag="wght" stylevalue="800" />
+        </font>
+        <font weight="900" style="normal" postScriptName="OPPOSerifSC">Oplus-Serif.ttf
+            <axis tag="wght" stylevalue="900" />
+        </font>
+        <font weight="1000" style="normal" postScriptName="OPPOSerifSC">Oplus-Serif.ttf
+            <axis tag="wght" stylevalue="1000" />
+        </font>
     </family>
 
     <family name="serif">
